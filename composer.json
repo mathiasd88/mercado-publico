@@ -1,0 +1,24 @@
+{
+    "name": "mathiasd88/mercado-publico",
+    "description": "Mercado Público API",
+    "keywords": ["laravel", "mercado-publico"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mathias Donoso",
+            "email": "mathiasd88@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": ">=5.6.0"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "5.4.*"
+    },
+    "autoload": {
+        "psr-4": {
+            "Mathiasd88\\MercadoPublico\\": "src/"
+        }
+    }
+}
