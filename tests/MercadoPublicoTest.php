@@ -10,7 +10,7 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
 
     /**
      * Creates a MercadoPublico instans for testing purposes.
-     * 
+     *
      * @return MercadoPublico
      */
     private function createMercadoPublicoInstance()
