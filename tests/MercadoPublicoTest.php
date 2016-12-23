@@ -20,6 +20,17 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
         return $mercadoPublico;
     }
 
+    /**
+     * Valid response for requests (Quizás la cantidad máxima de peticiones diarias se supere).
+     * 
+     * @param  Mathiasd88\MercadoPublico\MercadoPublico $response
+     * @return boolean
+     */
+    private function validResponse($response)
+    {
+        return ($response->status == 200 || $response->message = 'Ticket superó la cuota diaria asignada.');
+    }
+
     /** @test */
     public function it_can_be_instanciated()
     {
@@ -29,30 +40,22 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
     }
 
     /** @test */
-    public function it_shows_error_when_i_use_a_invalid_ticket()
-    {
-        // $wrongTicket = 'WRONG-TICKET';
-
-        // $mercadoPublico = new MercadoPublico($wrongTicket);
-
-        // $this->assertFalse($mercadoPublico->isValid());
-    }
-
-    /** @test */
-    public function it_validates_when_i_use_a_valid_ticket()
-    {
-        // $mercadoPublico = $this->createMercadoPublicoInstance();
-
-        // $this->assertTrue($mercadoPublico->isValid());
-    }
-
-    /** @test */
-    public function it_can_search_provider_by_name()
+    public function it_can_search_provider()
     {
         $mercadoPublico = $this->createMercadoPublicoInstance();
 
-        $response = $mercadoPublico->findProvider('70.017.820-k');
+        $response = $mercadoPublico->buscarProveedor('70.017.820-k');
 
-        $this->assertTrue(($response->status == 200 || $response->message = 'Ticket superó la cuota diaria asignada.'));
+        $this->assertTrue($this->validResponse($response));
+    }
+
+    /** @test */
+    public function it_can_search_buyers()
+    {
+        $mercadoPublico = $this->createMercadoPublicoInstance();
+
+        $response = $mercadoPublico->buscarComprador();
+
+        $this->assertTrue($this->validResponse($response));
     }
 }

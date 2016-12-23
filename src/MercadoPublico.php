@@ -26,13 +26,13 @@ class MercadoPublico
     }
 
     /**
-     * Send a request to the Mercado Publico API
+     * Envia la petición para que la API de la plataforma Mercado Público la procese.
      * 
      * @param  string $url
      * @param  array $params
      * @return Json
      */
-    public function sendRequest($url, $params)
+    public function enviaPeticion($url, $params = [])
     {
         $requestUrl = $this->url . $url . '?ticket=' . $this->ticket;
 
@@ -52,7 +52,7 @@ class MercadoPublico
     }
 
     /**
-     * Validates if the response is succesfully
+     * Procesa la respuesta: Si no fue exitosa agrega mensaje y còdigo 203, caso contrario mensaje de Éxito y código 200.
      */
     public function validates()
     {
@@ -61,27 +61,33 @@ class MercadoPublico
             $this->message = $this->response->Mensaje;
         } else {
             $this->status = 200;
-            $this->message = 'Success';
+            $this->message = 'Éxito';
         }
     }
 
     /**
-     * Search provider by name
+     * Busca proveedor por rut de la empresa (debe incluir puntos, guion y digito verificador).
      * 
      * @param  string $name
      * @return Object
      */
-    public function findProvider($rut)
+    public function buscarProveedor($rut)
     {
-        $rut = $this->formatRut($rut);
-
-        $response = $this->sendRequest('/Empresas/BuscarProveedor', ['rutempresaproveedor' => $rut]);
+        $response = $this->enviaPeticion('/Empresas/BuscarProveedor', ['rutempresaproveedor' => $rut]);
 
         return $this;
     }
 
-    private function formatRut($rut)
+    /**
+     * Listado de todos los organismos públicos de la plataforma Mercado Público.
+     * 
+     * @return Object
+     */
+    public function buscarComprador()
     {
-        return $rut;
+        $response = $this->enviaPeticion('/Empresas/BuscarComprador');
+
+        return $this;
     }
+
 }
