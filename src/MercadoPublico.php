@@ -73,10 +73,15 @@ class MercadoPublico
      */
     public function findProvider($rut)
     {
-        $rut = Format::formatRut($rut);
+        $rut = $this->formatRut($rut);
 
         $response = $this->sendRequest('/Empresas/BuscarProveedor', ['rutempresaproveedor' => $rut]);
 
         return $this;
+    }
+
+    private function formatRut($rut)
+    {
+        return $rut;
     }
 }
