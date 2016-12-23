@@ -90,4 +90,20 @@ class MercadoPublico
         return $this;
     }
 
+    /**
+     * Obtiene el listado de licitaciones disponibles en la plataforma Mercado Público.
+     * 
+     * @return Object
+     */
+    public function licitaciones()
+    {
+        $response = $this->enviaPeticion('/licitaciones.json');
+
+        return $this;
+    }
+
+    public function fecha()
+    {
+        return $this;
+    }
 }
