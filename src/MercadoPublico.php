@@ -15,8 +15,8 @@ class MercadoPublico
     public $message;
 
     /**
-     * Constructor class
-     * 
+     * Constructor class.
+     *
      * @param string $ticket
      */
     public function __construct($ticket)
@@ -26,18 +26,19 @@ class MercadoPublico
     }
 
     /**
-     * Send a request to the Mercado Publico API
-     * 
-     * @param  string $url
-     * @param  array $params
+     * Send a request to the Mercado Publico API.
+     *
+     * @param string $url
+     * @param array  $params
+     *
      * @return Json
      */
     public function sendRequest($url, $params)
     {
-        $requestUrl = $this->url . $url . '?ticket=' . $this->ticket;
+        $requestUrl = $this->url.$url.'?ticket='.$this->ticket;
 
         foreach ($params as $key => $value) {
-            $requestUrl .= '&' . $key . '=' . $value;
+            $requestUrl .= '&'.$key.'='.$value;
         }
 
         $json = file_get_contents($requestUrl);
@@ -52,7 +53,7 @@ class MercadoPublico
     }
 
     /**
-     * Validates if the response is succesfully
+     * Validates if the response is succesfully.
      */
     public function validates()
     {
@@ -66,10 +67,11 @@ class MercadoPublico
     }
 
     /**
-     * Search provider by name
-     * 
-     * @param  string $name
-     * @return Object
+     * Search provider by name.
+     *
+     * @param string $name
+     *
+     * @return object
      */
     public function findProvider($rut)
     {
