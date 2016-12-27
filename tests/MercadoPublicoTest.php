@@ -78,4 +78,55 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->validResponse($response));
     }
+
+    /** @test */
+    public function it_can_search_licitaciones_by_code()
+    {
+        $mercadoPublico = $this->createMercadoPublicoInstance();
+
+        $response = $mercadoPublico->licitaciones()->codigo('1509-5-L114')->get();
+
+        $this->assertTrue($this->validResponse($response));
+    }
+
+    /** @test */
+    public function it_can_search_licitaciones_by_status()
+    {
+        $estados = [
+            'publicada',
+            'activas',
+            'cerrada',
+            'desierta',
+            'adjudicada',
+            'revocada',
+            'suspendida',
+            'todos'
+        ];
+
+        $mercadoPublico = $this->createMercadoPublicoInstance();
+
+        $response = $mercadoPublico->licitaciones()->estado(array_rand($estados))->get();
+
+        $this->assertTrue($this->validResponse($response));
+    }
+
+    /** @test */
+    public function it_can_search_licitaciones_by_codigo_de_organismo()
+    {
+        $mercadoPublico = $this->createMercadoPublicoInstance();
+
+        $response = $mercadoPublico->licitaciones()->codigoOrganismo('6945')->get();
+
+        $this->assertTrue($this->validResponse($response));
+    }
+
+    /** @test */
+    public function it_can_search_licitaciones_by_codigo_de_proveedor()
+    {
+        $mercadoPublico = $this->createMercadoPublicoInstance();
+
+        $response = $mercadoPublico->licitaciones()->codigoProveedor('17793')->get();
+
+        $this->assertTrue($this->validResponse($response));
+    }
 }

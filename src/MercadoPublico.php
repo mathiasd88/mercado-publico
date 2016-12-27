@@ -32,7 +32,7 @@ class MercadoPublico
     /**
      * Envia la petición para que la API de la plataforma Mercado Público la procese.
      * 
-     * @return Json
+     * @return MercadoPublico
      */
     public function get()
     {
@@ -71,7 +71,7 @@ class MercadoPublico
      * Busca proveedor por rut de la empresa (debe incluir puntos, guion y digito verificador).
      * 
      * @param  string $name
-     * @return Object
+     * @return MercadoPublico
      */
     public function buscarProveedor($rut)
     {
@@ -85,7 +85,7 @@ class MercadoPublico
     /**
      * Listado de todos los organismos públicos de la plataforma Mercado Público.
      * 
-     * @return Object
+     * @return MercadoPublico
      */
     public function buscarComprador()
     {
@@ -97,7 +97,7 @@ class MercadoPublico
     /**
      * Obtiene el listado de licitaciones disponibles en la plataforma Mercado Público.
      * 
-     * @return Object
+     * @return MercadoPublico
      */
     public function licitaciones()
     {
@@ -106,8 +106,70 @@ class MercadoPublico
         return $this;
     }
 
-    public function fecha()
+    /**
+     * Filtro por fecha.
+     * 
+     * @param  string $fecha
+     * @return MercadoPublico
+     */
+    public function fecha($fecha)
     {
+        $this->params['fecha'] = $fecha;
+
+        return $this;
+    }
+
+    /**
+     * Filtro por código de licitación
+     * 
+     * @param  string $codigo
+     * @return MercadoPublico
+     */
+    public function codigo($codigo)
+    {
+        $this->params['codigo'] = $codigo;
+
+        return $this;
+    }
+
+    /**
+     * Filtro por estado de la licitación
+     * 
+     * @param  string $estado
+     * @return MercadoPublico
+     */
+    public function estado($estado)
+    {
+        $estado = strtolower($estado);
+
+        $this->params['estado'] = $estado;
+
+        return $this;
+    }
+
+    /**
+     * Filtro por organismo
+     * 
+     * @param  string $organismo
+     * @return MercadoPublico
+     */
+    public function codigoOrganismo($organismo)
+    {
+        $this->params['CodigoOrganismo'] = $organismo;
+
+        return $this;
+    }
+
+    /**
+     * Filtro por proveedor
+     * 
+     * @param  string $proveedor
+     * @return MercadoPublico
+     */
+    public function codigoProveedor($proveedor)
+    {
+        $this->params['CodigoProveedor'] = $proveedor;
+
         return $this;
     }
 }
