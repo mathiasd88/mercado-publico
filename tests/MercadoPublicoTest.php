@@ -103,9 +103,11 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
             'todos'
         ];
 
+        $randomValue = array_rand($estados);
+
         $mercadoPublico = $this->createMercadoPublicoInstance();
 
-        $response = $mercadoPublico->licitaciones()->estado(array_rand($estados))->get();
+        $response = $mercadoPublico->licitaciones()->estado($estados[$randomValue])->get();
 
         $this->assertTrue($this->validResponse($response));
     }
