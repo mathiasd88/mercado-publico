@@ -120,7 +120,7 @@ class MercadoPublico
     }
 
     /**
-     * Filtro por código de licitación
+     * Filtro por código
      * 
      * @param  string $codigo
      * @return MercadoPublico
@@ -133,7 +133,7 @@ class MercadoPublico
     }
 
     /**
-     * Filtro por estado de la licitación
+     * Filtro por estado
      * 
      * @param  string $estado
      * @return MercadoPublico
@@ -169,6 +169,20 @@ class MercadoPublico
     public function codigoProveedor($proveedor)
     {
         $this->params['CodigoProveedor'] = $proveedor;
+
+        return $this;
+    }
+
+    /**
+     * Filtro por un nuevo parámetro
+     * 
+     * @param  string $string
+     * @param  string $value
+     * @return MercadoPublico
+     */
+    public function custom($string, $value)
+    {
+        $this->params[$string] = $value;
 
         return $this;
     }

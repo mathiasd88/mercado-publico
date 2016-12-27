@@ -131,4 +131,14 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
 
         $this->assertTrue($this->validResponse($response));
     }
+
+    /** @test */
+    public function it_can_search_licitaciones_by_custom_filter()
+    {
+        $mercadoPublico = $this->createMercadoPublicoInstance();
+
+        $response = $mercadoPublico->licitaciones()->custom('CodigoProveedor', '17793')->get();
+
+        $this->assertTrue($this->validResponse($response));
+    }
 }
