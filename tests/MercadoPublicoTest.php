@@ -44,7 +44,7 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
     {
         $mercadoPublico = $this->createMercadoPublicoInstance();
 
-        $response = $mercadoPublico->buscarProveedor('70.017.820-k'); // Rut real de ejemplo
+        $response = $mercadoPublico->buscarProveedor('70.017.820-k'); // Rut real de ejempl->get()o
 
         $this->assertTrue($this->validResponse($response));
     }
@@ -54,7 +54,7 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
     {
         $mercadoPublico = $this->createMercadoPublicoInstance();
 
-        $response = $mercadoPublico->buscarComprador();
+        $response = $mercadoPublico->buscarComprador()->get();
 
         $this->assertTrue($this->validResponse($response));
     }
@@ -64,7 +64,7 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
     {
         $mercadoPublico = $this->createMercadoPublicoInstance();
 
-        $response = $mercadoPublico->licitaciones();
+        $response = $mercadoPublico->licitaciones()->get();
 
         $this->assertTrue($this->validResponse($response));
     }
@@ -74,7 +74,7 @@ class MercadoPublicoTest extends PHPUnit_Framework_TestCase
     {
         $mercadoPublico = $this->createMercadoPublicoInstance();
 
-        $response = $mercadoPublico->licitaciones()->fecha('02022014');
+        $response = $mercadoPublico->licitaciones()->fecha('02022014')->get();
 
         $this->assertTrue($this->validResponse($response));
     }

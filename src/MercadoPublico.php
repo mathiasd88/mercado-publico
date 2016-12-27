@@ -8,6 +8,10 @@ class MercadoPublico
 {
     protected $ticket;
 
+    protected $url;
+
+    protected $params = [];
+
     public $status;
 
     public $response;
@@ -28,15 +32,13 @@ class MercadoPublico
     /**
      * Envia la petición para que la API de la plataforma Mercado Público la procese.
      * 
-     * @param  string $url
-     * @param  array $params
      * @return Json
      */
-    public function enviaPeticion($url, $params = [])
+    public function get()
     {
-        $requestUrl = $this->url . $url . '?ticket=' . $this->ticket;
+        $requestUrl = $this->url . '?ticket=' . $this->ticket;
 
-        foreach ($params as $key => $value) {
+        foreach ($this->params as $key => $value) {
             $requestUrl .= '&' . $key . '=' . $value;
         }
 
@@ -48,7 +50,7 @@ class MercadoPublico
 
         $this->validates();
 
-        return json_decode($json);
+        return $this;
     }
 
     /**
@@ -73,7 +75,9 @@ class MercadoPublico
      */
     public function buscarProveedor($rut)
     {
-        $response = $this->enviaPeticion('/Empresas/BuscarProveedor', ['rutempresaproveedor' => $rut]);
+        $this->url .= '/Empresas/BuscarProveedor';
+
+        $this->params['rutempresaproveedor'] = $rut;
 
         return $this;
     }
@@ -85,7 +89,7 @@ class MercadoPublico
      */
     public function buscarComprador()
     {
-        $response = $this->enviaPeticion('/Empresas/BuscarComprador');
+        $this->url .= '/Empresas/BuscarComprador';
 
         return $this;
     }
@@ -97,7 +101,7 @@ class MercadoPublico
      */
     public function licitaciones()
     {
-        $response = $this->enviaPeticion('/licitaciones.json');
+        $this->url .= '/licitaciones.json';
 
         return $this;
     }
